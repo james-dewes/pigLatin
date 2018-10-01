@@ -13,11 +13,11 @@ public class testPigLatin {
     @Test
     public void testConvertWord(){
         String result = PigLatin.convertWord("Pig");
-        assert result.equals("igpay"):result ;
+        assert result.equals("igpay"):"expected 'igpay' got '" + result + "'";
     }
     @Test
     public void testConvert(){
         String result = PigLatin.convert("Stupid pig!");
-        assert result.equals("upidstay igpay!"):result ;
+        assert result.equals("upidstay igpay!"):"expected 'upidstay igpay!' got '" + result + "'";
     }
 }

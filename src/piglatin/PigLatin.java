@@ -6,6 +6,7 @@
 package piglatin;
 
 import java.util.*;
+import java.util.regex.*;
 
 /**
  *
@@ -13,8 +14,9 @@ import java.util.*;
  */
 public class PigLatin {
 
-    private static Collection<Character> vowels = new HashSet<Character>(Arrays.asList('a', 'e', 'i', 'o', 'u'));
-
+    private static final Collection<Character> vowels = new HashSet<Character>(Arrays.asList('a', 'e', 'i', 'o', 'u'));
+    private static final String punctuationPattern = "[\\p{Punct}\\p{IsPunctuation}]";
+            
     /**
      * @param args the command line arguments
      */
@@ -24,21 +26,34 @@ public class PigLatin {
 
     public static String convertWord(String aString) {
         aString = aString.toLowerCase();
+        //handle non letter charicters
+        char lastChar = aString.charAt(aString.length()-1); 
+        boolean punctuation = Pattern.matches(punctuationPattern, ""+lastChar);
+        if(punctuation){
+            aString = aString.substring(0, aString.length()-1);
+        }        
+        
+        //everything else
         if (vowels.contains(aString.charAt(0))) {
             return aString + "yay";
         } else {
             char[] word = aString.toCharArray();
             int i = 0 ;
-            while(!vowels.contains(word[i])){
+            while(i<word.length && !vowels.contains(word[i])){
                 i++;
             }
-            return aString.substring(i) + aString.substring(0,i) + "ay";
+            aString = aString.substring(i) + aString.substring(0,i) + "ay";
+            if(punctuation)
+            {
+                aString += lastChar;
+            }
+            return aString;
         }
         
     }
     public static String convert(String aString) {
         String result = "";
-        String[] words = aString.split(" ");
+        String[] words = aString.split("\\s+");
         for(int i = 0; i < words.length;i++)
         {
             result += convertWord(words[i]);
