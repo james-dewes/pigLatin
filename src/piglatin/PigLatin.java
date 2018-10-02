@@ -35,7 +35,7 @@ public class PigLatin {
         
         //everything else
         if (vowels.contains(aString.charAt(0))) {
-            return aString + "yay";
+            aString += "yay";
         } else {
             char[] word = aString.toCharArray();
             int i = 0 ;
@@ -43,12 +43,13 @@ public class PigLatin {
                 i++;
             }
             aString = aString.substring(i) + aString.substring(0,i) + "ay";
-            if(punctuation)
+            
+        }
+        if(punctuation)
             {
                 aString += lastChar;
             }
-            return aString;
-        }
+        return aString;
         
     }
     public static String convert(String aString) {
