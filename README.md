@@ -1,3 +1,5 @@
+# Solving Pig Latin with Java
+
 The rules of Pig Latin are as follows:
 1.	For words that begin with consonants, all letters before the initial vowel are placed at the end of the word sequence. Then, "ay" is added
 -	Pig =  igpay
